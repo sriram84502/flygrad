@@ -1,0 +1,54 @@
+DEBUG: Found Sheets: [
+  'Sunway University',
+  'Taylors University',
+  'Asia Pacific University (APU)',
+  'INTI International University',
+  'International Medical Universit',
+  'University of Cyberjaya (UoC)',
+  'Mila University',
+  'Universiti Kebangsaan Malaysia '
+]
+
+DEBUG: Sheet "Sunway University"
+   Headers: ["University Name","Study Level (UG/PG)","School / Department","Course Name","Link","Degree"]
+   Sample Data: ["Sunway University","UG","Faculty of Arts & Social Sciences (Creative Design)","Bachelor of Arts (Hnours) Design Communication","https://sunwayuniversity.edu.my/faculty-of-arts-and-social-sciences","Lancaster University"]
+
+DEBUG: Sheet "Taylors University"
+   Headers: ["University Name","Study Level (UG/PG)","School / Department","Course Name","Link","Degree"]
+   Sample Data: ["Taylor's University","UG","School of Architecture, Building and Design","Bachelor of Science (Honours) in Architecture","https://university.taylors.edu.my/en/study/explore-all-programmes/architecture-building-and-design/undergraduate/bachelor-of-science-honours-architecture","Taylor's University"]
+
+DEBUG: Sheet "Asia Pacific University (APU)"
+   Headers: ["University Name","Study Level (UG/PG)","School / Department","Course Name","Link","Degree"]
+   Sample Data: ["Asia Pacific University (APU)","UG",null,"Bachelor of Science (Hons) in Information technology","https://www.apu.edu.my/course/bachelor-information-technology","DMU"]
+
+DEBUG: Sheet "INTI International University"
+   Headers: ["University Name","Study Level (UG/PG)","School / Department","Course Name","Link","Degree","Collab"]
+   Sample Data: ["INTI International University & Colleges","UG",null,"B.A (Hons) in Fashion Management & Communication","https://newinti.edu.my/programme/b-a-hons-in-fashion-management-and-communication-30-in-collaboration-with-sheffield-hallam-university-uk/",null,"Sheffield Hallam Univeristy, UK"]
+
+DEBUG: Sheet "International Medical Universit"
+   Headers: ["University Name","Study Level (UG/PG)","School / Department","Course Name","Link","Degree"]
+   Sample Data: ["International Medical University","UG","School of Alternative & Complementary Medicine","Bachelor of Chinese Medicine Hons","https://imu.edu.my/academics/undergraduate/chinese-medicine/"]
+
+DEBUG: Sheet "University of Cyberjaya (UoC)"
+   Headers: ["University Name","Study Level (UG/PG)","School / Department","Course Name","Link","Degree"]
+   Sample Data: ["University of Cyberjaya (UoC)","UG","Faculty of Creative Arts and Design ","Bachelor in Mass Communication (Honours)","https://cyberjaya.edu.my/programme/bachelor-in-mass-communication-honours"]
+
+DEBUG: Sheet "Mila University"
+   Headers: ["University Name","Study Level (UG/PG)","School / Department","Course Name","Link","Degree"]
+   Sample Data: ["Mila University","UG","School of Management and Business","Bachelor of Accounting (Honours)","https://mila.edu.my/programme/bachelor-of-accounting-honours/"]
+
+DEBUG: Sheet "Universiti Kebangsaan Malaysia "
+   Headers: ["University Name","Study Level (UG/PG)","School / Department","Course Name","Link","Degree"]
+   Sample Data: ["Universiti Kebangsaan Malaysia (UKM)","UG","Faculty of Medicine","Bachelor of Nursing with Honours ","https://www.ukm.my/portalukm/undergraduate/nursing/"]
+DEBUG: Total valid programs found: 300
+DEBUG: Category computing: 88 programs
+DEBUG: Category engineering: 18 programs
+DEBUG: Category medicine: 42 programs
+DEBUG: Category business: 76 programs
+DEBUG: Category hospitality: 3 programs
+DEBUG: Category arts-design: 46 programs
+DEBUG: Category law: 2 programs
+DEBUG: Category science: 11 programs
+DEBUG: Category education: 10 programs
+DEBUG: Category islamic-studies: 4 programs
+DEBUG: Category other: 0 programs

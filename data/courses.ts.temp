@@ -1,0 +1,19 @@
+import { CourseCategory } from "@/types/course";
+
+export const courseCategories: CourseCategory[] = [
+    {
+        id: "arts-design",
+        title: "Arts & Design",
+        description: "Unleash your creativity in design, media, and communication.",
+        iconName: "Palette",
+        programs: [
+            {
+                degree: "Lancaster University",
+                university: "Sunway University",
+                universitySlug: "sunway-university",
+                link: "https://sunwayuniversity.edu.my/faculty-of-arts-and-social-sciences",
+            },
+        ]
+    },
+];
+
