@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView, Variants } from "framer-motion";
-import { useRef, ReactNode } from "react";
+import { useRef, ReactNode, useMemo } from "react";
 import { cn } from "@/lib/utils";
 
 interface FadeInProps {
@@ -22,9 +22,10 @@ export function FadeIn({
     fullWidth = false,
 }: FadeInProps) {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-10%" });
+    const isInView = useInView(ref, { once: true, margin: "-5%" });
 
-    const variants: Variants = {
+    // Memoize variants to prevent recreation on every render
+    const variants: Variants = useMemo(() => ({
         hidden: {
             opacity: 0,
             y: direction === "up" ? 20 : direction === "down" ? -20 : 0,
@@ -40,7 +41,7 @@ export function FadeIn({
                 ease: "easeOut",
             },
         },
-    };
+    }), [direction, duration, delay]);
 
     return (
         <motion.div
@@ -69,9 +70,9 @@ export function StaggerContainer({
     staggerDelay = 0.1,
 }: StaggerContainerProps) {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-10%" });
+    const isInView = useInView(ref, { once: true, margin: "-5%" });
 
-    const containerVariants = {
+    const containerVariants = useMemo(() => ({
         hidden: {},
         visible: {
             transition: {
@@ -79,7 +80,7 @@ export function StaggerContainer({
                 staggerChildren: staggerDelay,
             },
         },
-    };
+    }), [delay, staggerDelay]);
 
     return (
         <motion.div
@@ -114,7 +115,7 @@ interface ScaleInProps {
 
 export function ScaleIn({ children, className, delay = 0 }: ScaleInProps) {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-10%" });
+    const isInView = useInView(ref, { once: true, margin: "-5%" });
 
     return (
         <motion.div

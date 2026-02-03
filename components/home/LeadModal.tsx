@@ -14,17 +14,19 @@ export default function LeadModal({ isOpen, onClose }: LeadModalProps) {
     // Prevent scrolling when modal is open
     useEffect(() => {
         if (isOpen) {
+            // Store original overflow value
+            const originalOverflow = document.body.style.overflow;
             document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "unset";
+
+            return () => {
+                // Restore original overflow value on cleanup
+                document.body.style.overflow = originalOverflow;
+            };
         }
-        return () => {
-            document.body.style.overflow = "unset";
-        };
     }, [isOpen]);
 
     return (
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
             {isOpen && (
                 <>
                     {/* Backdrop */}
@@ -32,6 +34,7 @@ export default function LeadModal({ isOpen, onClose }: LeadModalProps) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
                         onClick={onClose}
                         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
                     >
@@ -40,6 +43,7 @@ export default function LeadModal({ isOpen, onClose }: LeadModalProps) {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ duration: 0.2, ease: "easeOut" }}
                             onClick={(e) => e.stopPropagation()}
                             className="relative w-full max-w-2xl bg-white rounded-3xl overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto"
                         >
@@ -48,6 +52,7 @@ export default function LeadModal({ isOpen, onClose }: LeadModalProps) {
                                 <button
                                     onClick={onClose}
                                     className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors"
+                                    aria-label="Close modal"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>

@@ -190,6 +190,9 @@ export default function CourseCategoryGrid() {
                                                 src={IMAGE_MAP[category.id] || "/images/placeholder.jpg"}
                                                 alt={category.title}
                                                 fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                quality={75}
+                                                loading="lazy"
                                                 className="object-cover group-hover:scale-110 transition-transform duration-700"
                                             />
                                         </div>
@@ -277,6 +280,9 @@ function CategoryDetailView({ category, courseCount, searchQuery }: { category: 
                         src={IMAGE_MAP[category.id] || "/images/placeholder.jpg"}
                         alt=""
                         fill
+                        sizes="100vw"
+                        quality={60}
+                        priority
                         className="object-cover opacity-40 blur-sm scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/90 to-brand-navy/40" />

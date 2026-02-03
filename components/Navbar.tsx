@@ -18,7 +18,8 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener("scroll", handleScroll);
+    // Use passive listener for better scroll performance
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -29,8 +30,20 @@ export default function Navbar() {
         setIsStudyDropdownOpen(false);
       }
     };
+
+    // Close dropdown on Escape key
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsStudyDropdownOpen(false);
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
   }, []);
 
   // Ensure transparency on specific pages
@@ -69,14 +82,16 @@ export default function Navbar() {
             </button>
 
             {/* Dropdown Menu */}
-            <AnimatePresence>
-              {(isStudyDropdownOpen || false) && (
+            <AnimatePresence mode="wait">
+              {isStudyDropdownOpen && (
                 <motion.div
                   initial={{ opacity: 0, y: 10, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
                   className="absolute top-full left-0 pt-4 w-64"
+                  onMouseEnter={() => setIsStudyDropdownOpen(true)}
+                  onMouseLeave={() => setIsStudyDropdownOpen(false)}
                 >
                   <div className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-white/50 overflow-hidden p-2 ring-1 ring-slate-900/5">
                     {[
@@ -99,8 +114,6 @@ export default function Navbar() {
                 </motion.div>
               )}
             </AnimatePresence>
-            {/* Hover trigger for desktop - using CSS for simple hover state, but keeping click logic functional */}
-            <div className="absolute top-0 w-full h-full cursor-pointer opacity-0" onMouseEnter={() => setIsStudyDropdownOpen(true)} />
           </div>
 
           <NavLink href="/courses" isActive={pathname === "/courses"}>Find a Course</NavLink>

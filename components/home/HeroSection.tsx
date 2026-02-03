@@ -10,46 +10,56 @@ import LeadModal from "./LeadModal";
 
 export default function HeroSection() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsModalOpen(true);
-        }, 1500);
+        // Check for reduced motion preference
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        setPrefersReducedMotion(mediaQuery.matches);
 
-        return () => clearTimeout(timer);
+        const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+        mediaQuery.addEventListener('change', handleChange);
+
+        return () => mediaQuery.removeEventListener('change', handleChange);
     }, []);
 
     return (
         <section className="relative min-h-[95vh] flex items-center pt-32 pb-20 overflow-hidden bg-white">
             {/* Animated Background Elements */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <motion.div
-                    animate={{
-                        scale: [1, 1.2, 1],
-                        rotate: [0, 90, 0],
-                        opacity: [0.3, 0.5, 0.3]
-                    }}
-                    transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        repeatType: "reverse"
-                    }}
-                    className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-brand-orange/5 rounded-full blur-[120px]"
-                />
-                <motion.div
-                    animate={{
-                        scale: [1, 1.1, 1],
-                        x: [0, 50, 0],
-                        opacity: [0.2, 0.4, 0.2]
-                    }}
-                    transition={{
-                        duration: 15,
-                        repeat: Infinity,
-                        repeatType: "reverse"
-                    }}
-                    className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-brand-navy/5 rounded-full blur-[100px]"
-                />
-            </div>
+            {!prefersReducedMotion && (
+                <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.2, 1],
+                            rotate: [0, 90, 0],
+                            opacity: [0.3, 0.5, 0.3]
+                        }}
+                        transition={{
+                            duration: 20,
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                            ease: "linear"
+                        }}
+                        style={{ willChange: "transform, opacity" }}
+                        className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-brand-orange/5 rounded-full blur-[120px]"
+                    />
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.1, 1],
+                            x: [0, 50, 0],
+                            opacity: [0.2, 0.4, 0.2]
+                        }}
+                        transition={{
+                            duration: 15,
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                            ease: "linear"
+                        }}
+                        style={{ willChange: "transform, opacity" }}
+                        className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-brand-navy/5 rounded-full blur-[100px]"
+                    />
+                </div>
+            )}
 
             <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
                 <StaggerContainer className="space-y-8" staggerDelay={0.1}>
