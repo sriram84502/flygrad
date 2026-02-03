@@ -32,10 +32,9 @@ export async function POST(req: NextRequest) {
         // Prepend system message to the conversation history
         const conversation = [systemMessage, ...messages];
 
-        // Using InferenceClient as requested by the user, but with non-streaming for now to ensure stability
-        // We will strip the <think> tags from the response before sending it to the frontend
+        // Using InferenceClient with a HuggingFace-compatible model
         const chatCompletion = await client.chatCompletion({
-            model: "deepseek-ai/DeepSeek-R1:novita", // Switched back to DeepSeek as requested
+            model: "meta-llama/Llama-3.2-3B-Instruct", // Using HF-compatible model
             messages: conversation,
             max_tokens: 500, // Limit response length
             temperature: 0.7,
