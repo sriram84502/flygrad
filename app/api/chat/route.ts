@@ -1,8 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { InferenceClient } from "@huggingface/inference";
-
-// Initialize the client securely on the server side
-const client = new InferenceClient(process.env.HF_TOKEN);
 
 export async function POST(req: NextRequest) {
     try {
@@ -10,6 +6,11 @@ export async function POST(req: NextRequest) {
 
         if (!messages || !Array.isArray(messages)) {
             return NextResponse.json({ error: "Invalid messages format" }, { status: 400 });
+        }
+
+        // Check if API key is available
+        if (!process.env.HF_TOKEN) {
+            return NextResponse.json({ error: "HF_TOKEN not configured" }, { status: 500 });
         }
 
         // System instruction to enforce the persona
@@ -32,20 +33,29 @@ export async function POST(req: NextRequest) {
         // Prepend system message to the conversation history
         const conversation = [systemMessage, ...messages];
 
-        // Using InferenceClient with a HuggingFace-compatible model
-        const chatCompletion = await client.chatCompletion({
-            model: "meta-llama/Llama-3.2-3B-Instruct", // Using HF-compatible model
-            messages: conversation,
-            max_tokens: 500, // Limit response length
-            temperature: 0.7,
+        // Use fetch directly to call HuggingFace API
+        const response = await fetch("https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${process.env.HF_TOKEN}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                model: "meta-llama/Llama-3.2-3B-Instruct",
+                messages: conversation,
+                max_tokens: 500,
+                temperature: 0.7,
+            }),
         });
 
-        const aiMessage = chatCompletion.choices[0].message;
-
-        // CLEANUP: Remove <think>...</think> blocks from the response
-        if (aiMessage.content) {
-            aiMessage.content = aiMessage.content.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error("HuggingFace API Error:", errorText);
+            return NextResponse.json({ error: `HuggingFace API error: ${errorText}` }, { status: response.status });
         }
+
+        const data = await response.json();
+        const aiMessage = data.choices[0].message;
 
         return NextResponse.json(aiMessage);
 
