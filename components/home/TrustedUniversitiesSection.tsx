@@ -26,7 +26,7 @@ export default function TrustedUniversitiesSection() {
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-8">
                     <p className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">
-                        Trusted by Top Universities
+                        Trusted by Top Universities of Malaysia
                     </p>
                 </div>
 

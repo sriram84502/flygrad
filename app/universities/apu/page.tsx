@@ -13,7 +13,7 @@ export default function APUPage() {
         "Banking & Finance",
         "Design & Creative Media",
         "Digital Marketing & Media",
-        "Animation & Visual Effects",
+        "Game Development & Interactive Media",
         "Actuarial Studies",
         "Hospitality & Tourism",
         "International Relations",

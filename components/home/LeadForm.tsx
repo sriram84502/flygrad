@@ -247,7 +247,7 @@ export default function LeadForm({ className = "" }: { className?: string }) {
                 disabled={isSubmitting}
                 className="group w-full py-4 px-6 bg-gradient-to-r from-brand-orange to-orange-600 text-white rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-brand-orange/30 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-                {isSubmitting ? 'Submitting...' : 'Get My Free Plan'}
+                {isSubmitting ? 'Submitting...' : 'Get My Study Plan'}
                 {!isSubmitting && <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
             </motion.button>
         </motion.form>

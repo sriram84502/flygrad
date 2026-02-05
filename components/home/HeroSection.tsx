@@ -20,6 +20,20 @@ export default function HeroSection() {
         const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
         mediaQuery.addEventListener('change', handleChange);
 
+        // Auto-open modal after 2 seconds on first visit
+        const hasSeenModal = sessionStorage.getItem('hasSeenLeadModal');
+        if (!hasSeenModal) {
+            const timer = setTimeout(() => {
+                setIsModalOpen(true);
+                sessionStorage.setItem('hasSeenLeadModal', 'true');
+            }, 2000); // 2 second delay
+
+            return () => {
+                mediaQuery.removeEventListener('change', handleChange);
+                clearTimeout(timer);
+            };
+        }
+
         return () => mediaQuery.removeEventListener('change', handleChange);
     }, []);
 
@@ -75,18 +89,17 @@ export default function HeroSection() {
 
                     <FadeIn delay={0.2}>
                         <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-brand-navy leading-[1.1] mb-6">
-                            Don&#x27;t just study <br />
-                            abroad. <br />
-                            <span className="text-brand-orange">
-                                Launch your <br />
-                                career.
-                            </span>
+                            Smarter Study Abroad
                         </h1>
+                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-brand-navy leading-[1.2] mb-4">
+                            Don&#x27;t Just Study Abroad. <br />
+                            <span className="text-brand-orange">Study Smart in Malaysia.</span>
+                        </h2>
                     </FadeIn>
 
                     <FadeIn delay={0.3}>
                         <p className="text-xl text-slate-600 max-w-xl leading-relaxed mb-8">
-                            We move beyond generic advice. Get a personalized roadmap to the world&#x27;s best universities and a strategy to build a global career.
+                            Affordable global education designed for strong career outcomes and high ROI.
                         </p>
                     </FadeIn>
 
@@ -118,9 +131,9 @@ export default function HeroSection() {
                     <FadeIn delay={0.5}>
                         <div className="pt-8 flex items-center gap-8 border-t border-slate-200/60">
                             {[
-                                { value: "98%", label: "Visa Success" },
-                                { value: "15+", label: "Partner Unis" },
-                                { value: "$2M+", label: "Scholarships" }
+                                { value: "100+", label: "Visa Success" },
+                                { value: "450+", label: "Partner Unis" },
+                                { value: "$5M+", label: "Scholarships" }
                             ].map((stat, i) => (
                                 <div key={i} className="group cursor-default">
                                     <div className="text-3xl font-bold text-brand-navy group-hover:text-brand-orange transition-colors duration-300">{stat.value}</div>
