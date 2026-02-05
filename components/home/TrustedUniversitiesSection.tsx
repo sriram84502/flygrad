@@ -1,20 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2, GraduationCap, Library, Globe2, Award, BookOpen } from "lucide-react";
+import Image from "next/image";
 
-// Placeholder icons since we don't have the logos
+// University logos
 const universities = [
-    { name: "Asia Pacific University (APU)", icon: Building2 },
-    { name: "INTI International University", icon: Globe2 },
-    { name: "International Medical University", icon: GraduationCap },
-    { name: "MAHSA University", icon: Library },
-    { name: "MILA University", icon: Award },
-    { name: "Sunway University", icon: BookOpen },
-    { name: "Taylor’s University", icon: GraduationCap },
-    { name: "UCSI University", icon: Building2 },
-    { name: "University of Cyberjaya", icon: Globe2 },
-    { name: "Universiti Kebangsaan Malaysia", icon: Library },
+    { name: "Asia Pacific University (APU)", logo: "/images/universities/apu.png" },
+    { name: "INTI International University", logo: "/images/universities/inti.png" },
+    { name: "International Medical University", logo: "/images/universities/imu.png" },
+    { name: "MAHSA University", logo: "/images/universities/mahsa.png" },
+    { name: "MILA University", logo: "/images/universities/mila.png" },
+    { name: "Sunway University", logo: "/images/universities/sunway.png" },
+    { name: "Taylor's University", logo: "/images/universities/taylors.png" },
+    { name: "UCSI University", logo: "/images/universities/ucsi.png" },
+    { name: "University of Cyberjaya", logo: "/images/universities/cyberjaya.png" },
+    { name: "Universiti Kebangsaan Malaysia", logo: "/images/universities/ukm.png" },
 ];
 
 export default function TrustedUniversitiesSection() {
@@ -48,14 +48,19 @@ export default function TrustedUniversitiesSection() {
                         {scrollingUniversities.map((uni, index) => (
                             <div
                                 key={index}
-                                className="flex items-center gap-2 group cursor-pointer opacity-60 grayscale hover:grayscale-0 transition-all duration-300 pointer-events-auto"
+                                className="flex items-center gap-3 group cursor-pointer opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300 pointer-events-auto"
                             >
-                                {/* Using Lucide icons as placeholders for logos */}
-                                <uni.icon
-                                    className="w-10 h-10 text-slate-600 group-hover:text-brand-navy"
-                                    strokeWidth={1.5}
-                                />
-                                <span className="text-lg font-bold text-slate-600 group-hover:text-brand-navy hidden md:block whitespace-nowrap">
+                                {/* University Logo */}
+                                <div className="relative w-12 h-12 flex-shrink-0">
+                                    <Image
+                                        src={uni.logo}
+                                        alt={`${uni.name} logo`}
+                                        fill
+                                        className="object-contain"
+                                        sizes="48px"
+                                    />
+                                </div>
+                                <span className="text-base font-semibold text-slate-700 group-hover:text-brand-navy hidden md:block whitespace-nowrap">
                                     {uni.name}
                                 </span>
                             </div>

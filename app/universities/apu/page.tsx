@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FadeIn, StaggerContainer } from "@/components/ui/animations";
 import { Trophy, Users, Star, BookOpen, GraduationCap, Calendar } from "lucide-react";
 
@@ -54,15 +55,21 @@ export default function APUPage() {
                     </FadeIn>
 
                     <div className="relative">
-                        {/* Placeholder for University Image - Creating a distinct visual block */}
+                        {/* University Logo */}
                         <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
-                            <div className="aspect-video bg-gradient-to-br from-brand-orange/20 to-brand-navy/40 rounded-xl mb-6 flex items-center justify-center">
-                                <Building2 className="w-20 h-20 text-white/50" />
+                            <div className="aspect-video bg-gradient-to-br from-white/10 to-white/5 rounded-xl mb-6 flex items-center justify-center p-12">
+                                <Image
+                                    src="/images/universities/apu.png"
+                                    alt="Asia Pacific University Logo"
+                                    width={400}
+                                    height={200}
+                                    className="object-contain w-full h-full"
+                                />
                             </div>
                             <div className="space-y-4">
                                 <h3 className="text-xl font-bold">Innovation & Technology Hub</h3>
                                 <p className="text-slate-400 text-sm">
-                                    APU’s campus is a modern, technology-enabled environment designed to support innovation.
+                                    APU's campus is a modern, technology-enabled environment designed to support innovation.
                                 </p>
                             </div>
                         </div>
